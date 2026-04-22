@@ -12,3 +12,10 @@ document.addEventListener("mousemove", (e) => {
 
   bg.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
 });
+
+const toggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+toggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});

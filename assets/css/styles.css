@@ -1,18 +1,22 @@
-:root{
-  --bg: #212122;
-  --text: #ebebeb;
-  --border: rgb(0, 0, 0);
-  --border-strong: rgb(46, 46, 46);
-  --max: 980px;
+:root {
+    --bg: #212122;
+    --text: #ebebeb;
+    --border: rgb(0, 0, 0);
+    --border-strong: rgb(46, 46, 46);
+    --max: 100%;
 }
 
-
-
+/* Debuggig to find the bg-image rendering issue, commented out for prod
+* {
+    outline: 1px solid red;
+}
+*/
 
 /* Index: */
 
-.p-footer { color: #ebebeb;
-    font-size: 10   0%;
+.p-footer {
+    color: #ebebeb;
+    font-size: 10 0%;
     text-align: center;
 }
 
@@ -21,7 +25,10 @@
 }
 
 .FAQ {
-    padding: 0rem 20rem 0rem 20rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+
 }
 
 .first-ul {
@@ -29,7 +36,7 @@
 }
 
 .index-p {
-    font-size:1.15rem;
+    font-size: 1.15rem;
 }
 
 /* bg: */
@@ -62,24 +69,49 @@
     color: rgb(255, 255, 255);
 }
 
+/* fixed image background with scaling and no overflow to prevent bg image from overflowing */
+.bg-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
 
 .page-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background-image: url(../css/static/images/catforge-site-bg-home.png);
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: 100% auto;
-
-  z-index: -1;
-  pointer-events: none;
-  will-change: transform;
-  transition: transform 0.2s ease-out;
+    width: 110%;
+    height: 110%;
+    position: absolute;
+    inset: 0;
+    background-image: url(../css/static/images/catforge-site-bg-home.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    will-change: transform;
+    transition: transform 0.2s ease-out;
 }
+
+/* The width 100% with src image pixel width of 1081 was screwing with the viewport rendering as the browser viewport is 1040px~
+    adding a background wrapper with no overflow and setting the bg image to 110% seems to fix the issue and allows the bg 
+    image to scale with the viewport without causing any issues. 
+.page-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url(../css/static/images/catforge-site-bg-home.png);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.2s ease-out;
+}
+*/
 
 /* section padding */
 section {
@@ -87,7 +119,9 @@ section {
 }
 
 .section-bottom-of-page {
-    padding: 4rem 16rem 2rem 11rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem 0;
 }
 
 hero {
@@ -105,11 +139,11 @@ li {
 }
 
 .li-first:hover {
-  transform: scale(1.1);
-  color:#fff;
-  text-shadow: 0 0 5px #f3f3f3,
-               0 0 10px #005854,
-               0 0 20px #004f46;
+    transform: scale(1.1);
+    color: #fff;
+    text-shadow: 0 0 5px #f3f3f3,
+        0 0 10px #005854,
+        0 0 20px #004f46;
 }
 
 /* H1 */
@@ -121,11 +155,11 @@ li {
 }
 
 .hero-h1:hover {
-  transform: scale(1.01);
-  color:#fff;
-  text-shadow: 0 0 5px #f3f3f3,
-               0 0 10px #005854,
-               0 0 20px #004f46;
+    transform: scale(1.01);
+    color: #fff;
+    text-shadow: 0 0 5px #f3f3f3,
+        0 0 10px #005854,
+        0 0 20px #004f46;
 }
 
 
@@ -138,11 +172,11 @@ h1 {
 }
 
 h1:hover {
-  transform: scale(1.01);
-  color:#ffffff;
-  text-shadow: 0 0 5px #f3f3f3,
-               0 0 10px #005854,
-               0 0 20px #004f46;
+    transform: scale(1.01);
+    color: #ffffff;
+    text-shadow: 0 0 5px #f3f3f3,
+        0 0 10px #005854,
+        0 0 20px #004f46;
 }
 
 h3 {
@@ -152,112 +186,323 @@ h3 {
 }
 
 h3:hover {
-  transform: scale(1.005);
-  color:#fff;
-  text-shadow: 0 0 5px #f3f3f3,
-               0 0 10px #005854,
-               0 0 20px #004f46;
+    transform: scale(1.005);
+    color: #fff;
+    text-shadow: 0 0 5px #f3f3f3,
+        0 0 10px #005854,
+        0 0 20px #004f46;
 }
 
 /* Base */
-*{ box-sizing:border-box; }
-html, body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
+* {
+    box-sizing: border-box;
 }
+
+html,
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Inter", sans-serif;
-  line-height: 1.6;
-  position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-a{ color: var(--text); text-decoration: none; text-underline-offset: 3px; }
-a:hover{ opacity: .85; }
-
-.container{
-  width: min(var(--max), calc(100% - 2rem));
-  margin: 0 auto;
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    position: relative;
 }
 
-.skip-link{
-  position:absolute; left:-999px; top:0;
-  padding:.6rem .8rem;
-  border: 1px solid var(--border-strong);
-  background: var(--bg);
-  color: var(--text);
+a {
+    color: var(--text);
+    text-decoration: none;
+    text-underline-offset: 3px;
 }
-.skip-link:focus{ left:1rem; top:1rem; }
+
+a:hover {
+    opacity: .85;
+}
+
+.container {
+    width: min(var(--max), calc(100% - 2rem));
+    margin: 0 auto;
+}
+
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    padding: .6rem .8rem;
+    border: 1px solid var(--border-strong);
+    background: var(--bg);
+    color: var(--text);
+}
+
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+}
 
 /* Type scale (all Times New Roman, varying sizes) */
 /*.t-h1{ font-size: clamp(2rem, 4vw, 3.2rem); margin: 0 0 .75rem; font-weight: 700; }*/
-.t-h2{ font-size: clamp(1.3rem, 2.2vw, 1.7rem); margin: 0 0 .5rem; font-weight: 700; }
-.t-lead{ font-size: 1.15rem; margin: 0 0 1rem; }
-.t-body{ font-size: 1.02rem; margin: 0 0 1rem; }
-.t-small{ font-size: .95rem; margin: 0; opacity: .9; }
-.t-bold{font-size: 1.15rem; margin: 0 0 1rem; }
+.t-h2 {
+    font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+    margin: 0 0 .5rem;
+    font-weight: 700;
+}
 
+.t-lead {
+    font-size: 1.15rem;
+    margin: 0 0 1rem;
+}
 
+.t-body {
+    font-size: 1.02rem;
+    margin: 0 0 1rem;
+}
 
+.t-small {
+    font-size: .95rem;
+    margin: 0;
+    opacity: .9;
+}
+
+.t-bold {
+    font-size: 1.15rem;
+    margin: 0 0 1rem;
+}
 
 /* Header */
-.site-header{
-  border-bottom: 1px solid var(--border);
-  background-color: rgb(7, 7, 7);
-  box-shadow: 0 12px 14px 0 rgba(0,0,0,.2);
-  size-adjust: 60%;
-}
-.nav{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:1rem;
-  padding: 1rem 0;
-}
-.brand{
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-decoration: none;
-}
-.nav-links{
-  display:flex;
-  gap:1rem;
-  align-items:right;
-  font-weight:100;
+.site-header {
+  position: sticky;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: fit-content;
+  padding: 0.65rem 1.25rem;
+
+  background: rgba(15, 15, 15, 0.55);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+
+  z-index: 1000;
+  margin: 0;
 }
 
-.nav-links a{
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  font-size: 1.10rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
-  transition: all 0.3s ease;
+.nav {
+
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
 }
 
-.nav-links a.active{
-  border-bottom-color: var(--text);
+.brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    align-items: right;
+    font-weight: 100;
+}
+
+.nav-links a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-top: 2px;
+    font-size: 1.10rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links a.active {
+    border-bottom-color: var(--text);
 }
 
 /* glow effect on hover */
 .nav-links a:hover {
-  transform: scale(1.2);
-  color:#fff;
-  text-shadow: 0 0 5px #fff,
-               0 0 10px #fff,
-               0 0 20px #00ffe1;
+    transform: scale(1.2);
+    color: #fff;
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 20px #00ffe1;
 }
 
-.nav-toggle{
-  display:none;
-  font-family: inherit;
-  font-size: 1rem;
-  color: var(--text);
-  background: transparent;
-  border: 1px solid var(--border-strong);
-  padding: .45rem .7rem;
+.nav-toggle {
+    display: none;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    padding: .45rem .7rem;
 }
 
+/* Base responsive improvements */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+hero,
+section,
+header,
+nav,
+div,
+footer {
+  max-width: 100%;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  section {
+    padding: 3rem 4rem 0 4rem;
+  }
+
+  .FAQ {
+    padding: 0 4rem;
+  }
+
+  .section-bottom-of-page {
+    padding: 3rem 4rem 2rem 4rem;
+  }
+
+  .hero-h1 {
+    font-size: 3.5rem;
+  }
+
+  h1 {
+    font-size: 2.75rem;
+  }
+
+  .apply-button {
+    font-size: 3.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 0;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0.5rem;
+    left: auto;
+    transform: none;
+
+    width: calc(100% - 1rem);
+    max-width: 420px;
+    margin: 0.5rem auto 0;
+    padding: 0.75rem 1rem;
+
+    border-radius: 18px;
+    z-index: 1000;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: inline-block;
+    width: 100%;
+    max-width: 180px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+  }
+
+  section {
+    padding: 2rem 1.25rem 0 1.25rem;
+  }
+
+  .FAQ {
+    padding: 0 1.25rem;
+  }
+
+  .section-bottom-of-page {
+    padding: 2rem 1.25rem 2rem 1.25rem;
+  }
+
+  .hero-h1 {
+    font-size: 2.4rem;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-size: 1.35rem;
+  }
+
+  .index-p,
+  li,
+  .t-bold {
+    font-size: 1rem;
+  }
+
+  .apply-button {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  .apply-div {
+    padding: 1.5rem 0.5rem 0 0.5rem;
+  }
+
+  .p-footer {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+}
