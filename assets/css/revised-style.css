@@ -21,6 +21,12 @@
   --transition-med: 0.3s ease;
 }
 
+/* mouse */
+body {
+  /* Mandatory: URL to your PNG followed by a required fallback keyword */
+  cursor: url('/assets/css/static/images/mouse.png'), auto;
+}
+
 /* Base reset */
 *,
 *::before,
@@ -103,6 +109,7 @@ section {
 }
 
 /* Background */
+/* index */
 .bg-wrap {
   position: absolute;
   inset: 0;
@@ -117,6 +124,16 @@ section {
   width: 110%;
   height: 110%;
   background: url(../css/static/images/catforge-site-bg-home.png) top center / cover no-repeat;
+  will-change: transform;
+  transition: transform var(--transition-fast);
+}
+
+.projects-bg {
+  position: absolute;
+  inset: 0;
+  width: 110%;
+  height: 110%;
+  background: url(../css/static/images/catforge-site-bg-projects.png) top center / cover no-repeat;
   will-change: transform;
   transition: transform var(--transition-fast);
 }
@@ -438,4 +455,87 @@ h3:hover {
   .nav-links a {
     font-size: 0.9rem;
   }
+}
+
+
+
+/* projects page */
+.team {
+  width: min(1200px, 100% - 2rem);
+  margin: 2rem auto;
+}
+
+.team-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: lowercase;
+  margin-bottom: 1.5rem;
+}
+
+/* GRID */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.75rem 1.25rem;
+}
+
+/* CARD */
+.team-card {
+  background: #10101000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  background: #181818;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* IMAGE */
+.team-card img {
+  width: 120px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+/* TEXT */
+.team-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.team-card p {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  color: #a0a0a0;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-card img {
+    width: 100px;
+  }
+}
+
+@media (max-width: 400px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.officers-h1 {
+  padding: 3rem;
+  font-weight: 600;
 }
