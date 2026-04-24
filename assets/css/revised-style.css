@@ -128,12 +128,12 @@ section {
   transition: transform var(--transition-fast);
 }
 
-.projects-bg {
+.officers-bg {
   position: absolute;
   inset: 0;
   width: 110%;
   height: 110%;
-  background: url(../css/static/images/catforge-site-bg-projects.png) top center / cover no-repeat;
+  background: url(../css/static/images/catforge-site-bg-officers.png) top center / cover no-repeat;
   will-change: transform;
   transition: transform var(--transition-fast);
 }
@@ -223,6 +223,7 @@ h3:hover {
 .apply-button {
   margin: 0;
   font-size: 5.5rem;
+  padding: 10rem 0rem 10rem 0rem;
   text-align: center;
   color: rgb(227, 218, 119);
 }
@@ -462,7 +463,7 @@ h3:hover {
 /* projects page */
 .team {
   width: min(1200px, 100% - 2rem);
-  margin: 2rem auto;
+ /* margin: 2rem auto; */
 }
 
 .team-title {
@@ -538,4 +539,11 @@ h3:hover {
 .officers-h1 {
   padding: 3rem;
   font-weight: 600;
+}
+
+
+/* random */
+.spacer-bottom-of-page {
+  padding: 0rem 0rem 3rem 0rem;
+  color: transparent;
 }
