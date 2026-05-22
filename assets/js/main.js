@@ -1,5 +1,5 @@
 /* mouse movement for bg */
-const bg = document.querySelector('.page-bg, .officers-bg');
+const bg = document.querySelector('.page-bg, .officers-bg, .projects-bg');
 
 document.addEventListener("mousemove", (e) => {
   const x = (e.clientX / window.innerWidth - 0.3);
